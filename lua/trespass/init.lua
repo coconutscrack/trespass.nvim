@@ -21,7 +21,7 @@ local handle_enabled = function(config)
   clear_trespass()
 
   vim.api.nvim_set_hl(0, "Trespass", {
-    link = "DiagnosticErrorLn",
+    link = config.color,
     default = true
   })
 

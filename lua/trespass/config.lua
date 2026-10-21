@@ -4,6 +4,7 @@ local default_config = {
   enabled = true,
   column = 80,
   priority = 100,
+  color = "ErrorMsg"
 }
 
 M.resolve_config = function(opts)
