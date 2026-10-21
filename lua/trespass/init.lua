@@ -26,7 +26,7 @@ local handle_enabled = function(config)
     { clear = false }
   )
 
-  local rx = string.format("\\%>%dv.\\+", config.column)
+  local rx = string.format("\\%%>%dv.\\+", config.column)
   vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
     group = group,
     callback = function()
