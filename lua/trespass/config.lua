@@ -4,7 +4,8 @@ local default_config = {
   enabled = true,
   column = 80,
   priority = 100,
-  color = "ErrorMsg"
+  color = "ErrorMsg",
+  ft = { "lua", "c", "javascript", "typescript", "asm" },
 }
 
 M.resolve_config = function(opts)
