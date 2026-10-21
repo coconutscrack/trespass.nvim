@@ -27,14 +27,26 @@ local handle_enabled = function(config)
   )
 
   local rx = string.format("\\%%>%dv.\\+", config.column)
+
+  local apply_match_with_guard = function(window_id)
+    local success = pcall(vim.api.nvim_win_get_var, window_id, "trespass_hl_id")
+    if not success then
+      local match_id = vim.fn.matchadd("Trespass", rx, config.priority, -1, { window = window_id })
+      vim.api.nvim_win_set_var(window_id, "trespass_hl_id", match_id)
+    end
+  end
+
   vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
     group = group,
     callback = function()
-      if not vim.w.trespass_hl_id then
-        vim.w.trespass_hl_id = vim.fn.matchadd("Trespass", rx, config.priority)
-      end
+      apply_match_with_guard(vim.api.nvim_get_current_win())
     end,
   })
+
+  local ws = vim.api.nvim_list_wins()
+  for _, window_id in ipairs(ws) do
+    apply_match_with_guard(window_id)
+  end
 end
 
 M.setup = function(opts)
