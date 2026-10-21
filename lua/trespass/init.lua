@@ -19,7 +19,7 @@ end
 
 local handle_enabled = function(config)
   clear_trespass()
-  vim.api.nvim_set_hl(0, "Trespass", { link = "ErrorMsg", default = true })
+  vim.api.nvim_set_hl(0, "Trespass", { link = "DiagnosticErrorLn", default = true })
 
   local group = vim.api.nvim_create_augroup(
     "Trespass",
@@ -31,7 +31,7 @@ local handle_enabled = function(config)
     group = group,
     callback = function()
       if not vim.w.trespass_hl_id then
-        vim.w.trespass_hl_id = vim.fn.matchadd("Trespass", rx, -1)
+        vim.w.trespass_hl_id = vim.fn.matchadd("Trespass", rx, config.priority)
       end
     end,
   })

@@ -2,7 +2,8 @@ local M = {}
 
 local default_config = {
   enabled = true,
-  column = 81,
+  column = 80,
+  priority = 100,
 }
 
 M.resolve_config = function(opts)
