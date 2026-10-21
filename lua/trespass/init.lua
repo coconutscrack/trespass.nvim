@@ -25,11 +25,6 @@ local handle_enabled = function(config)
     default = true
   })
 
-  local group = vim.api.nvim_create_augroup(
-    "Trespass",
-    { clear = false }
-  )
-
   local rx = string.format("\\%%>%dv.\\+", config.column)
 
   local apply_match_with_guard = function(window_id)
@@ -42,6 +37,11 @@ local handle_enabled = function(config)
       vim.api.nvim_win_set_var(window_id, "trespass_hl_id", match_id)
     end
   end
+
+  local group = vim.api.nvim_create_augroup(
+    "Trespass",
+    { clear = false }
+  )
 
   vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
     group = group,
