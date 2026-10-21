@@ -24,7 +24,7 @@ require("trespass").setup({
   column = 80,
   priority = 100,
   color = "ErrorMsg",
-  ft = { "lua", "c" },
+  ft = { "lua", "c", "javascript", "typescript", "asm" },
 })
 ```
 
