@@ -1,7 +1,7 @@
 # trespass.nvim
-Trespass highlights the part of a line that goes past your column limit. Instead of drawing a ruler down the whole window the way colorcolumn does, it marks only the text that actually crosses the line, so you see overflow when it happens and nothing the rest of the time.
+Trespass highlights the part of a line that goes past your column limit. Instead of drawing a ruler like colorcolumn, trespass marks only the text that actually crosses the line, so you see overflow when needed and nothing Otherwise.
 
-It’s a small Neovim plugin written in Lua. The highlight uses the Trespass group, which links to ErrorMsg by default, so any colorscheme can restyle it.
+Trespass is a small Neovim plugin written in Lua. The highlight uses the Trespass group, which links to ErrorMsg by default, so any colorscheme can restyle it.
 
 ## Installation
 
@@ -34,14 +34,13 @@ require("trespass").setup({
 | `priority` | integer | `100`        | Priority of the match (see `:help matchadd()`). Higher wins over other matches. |
 | `color`    | string  | `"ErrorMsg"` | Name of the highlight group that `Trespass` links to, e.g. `"WarningMsg"`.  |
 
-Options are not validated. Pass the types listed above; a wrong type may raise
-an error or be silently ignored, and unknown keys (such as a typo like
+Options are not validated. Please pass the types listed above; a wrong type may raise
+an error or be ignored. Unknown keys (like
 `colum`) are ignored.
 
 ### Changing the color
 
-Set `color` to the name of any existing highlight group, including one you
-define yourself:
+Set `color` to the name of any existing highlight group, if you would like to customise this further, you may create your own highlight group. 
 
 ```lua
 vim.api.nvim_set_hl(0, "MyOverflow", { fg = "#ff5f5f", underline = true })
@@ -53,6 +52,4 @@ The link is resolved by name, so it doesn't matter whether your group is
 defined before or after `setup()`. A group that doesn't exist at all is not
 reported; the highlight just won't show.
 
-The `Trespass` group is defined with `default = true`, so it survives
-`:highlight clear` from a colorscheme, but that also means it is only set on
-the first `setup()` call in a session. Restart Neovim to apply a new `color`.
+**Important:** Restart Neovim to apply a new color.
