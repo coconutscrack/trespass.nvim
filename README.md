@@ -24,6 +24,7 @@ require("trespass").setup({
   column = 80,
   priority = 100,
   color = "ErrorMsg",
+  ft = { "lua", "c" },
 })
 ```
 
@@ -33,10 +34,25 @@ require("trespass").setup({
 | `column`   | integer | `80`         | Text past this column is highlighted.                                       |
 | `priority` | integer | `100`        | Priority of the match (see `:help matchadd()`). Higher wins over other matches. |
 | `color`    | string  | `"ErrorMsg"` | Name of the highlight group that `Trespass` links to, e.g. `"WarningMsg"`.  |
+| `ft`       | list of strings | `{ "lua", "c" }` | Filetypes to highlight. Windows showing any other filetype are left alone. |
 
 Options are not validated. Please pass the types listed above; a wrong type may raise
 an error or be ignored. Unknown keys (like
 `colum`) are ignored.
+
+### Choosing filetypes
+
+`ft` is an allowlist of filetype names, as shown by `:set filetype?`.
+
+```lua
+require("trespass").setup({ ft = { "lua", "c", "python" } })
+```
+
+- Your list **replaces** the default; it is not added to it. To keep `lua`
+  and `c`, include them.
+- An empty list (`ft = {}`) allows no filetypes, so nothing is highlighted.
+- If a window switches to a filetype that isn't in the list, its highlight is
+  removed.
 
 ### Changing the color
 
